@@ -1,0 +1,22 @@
+name: CentOS
+version: 1
+inputs: {}
+resources:
+  demo-vsphere-disk-001:
+    type: Cloud.vSphere.Disk
+    properties:
+      name: DISK_001
+      type: HDD
+      capacityGb: 10
+      dataStore: 'datastore-01'
+      provisioningType: thin
+  demo-machine:
+    type: Cloud.vSphere.Machine
+    properties:
+      name: demo-machine
+      cpuCount: 2
+      totalMemoryMB: 2048
+      imageRef: >-
+        https://bintray.com/vmware/photon/download_file?file_path=2.0%2FRC%2Fova%2Fphoton-custom-hw11-2.0-31bb961.ova
+      attachedDisks:
+        - source: '${demo-vsphere-disk-001.id}'
